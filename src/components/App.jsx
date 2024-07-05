@@ -7,12 +7,13 @@ import StarSceen from "./StarSceen";
 import Question from "./Question";
 
 // todo initialState
+// "loading", "error", "ready", "active", "finish"
 const initialState = {
   questions: [],
-
-  // "loading", "error", "ready", "active", "finish"
   status: "loading",
   index: 0,
+  answer: null,
+  point: 0,
 };
 
 // todo reducer
@@ -34,6 +35,16 @@ function reducer(state, action) {
         ...state,
         status: "active",
       };
+    case "newAnswer":
+      const question = state.questions.at(state.index);
+      return {
+        ...state,
+        answer: action.payload,
+        point:
+          action.payload === question.correctOption
+            ? state.point + question.points
+            : state.point,
+      };
     default:
       throw new Error("Action unknow!!!");
   }
@@ -41,7 +52,10 @@ function reducer(state, action) {
 
 // todo App
 export default function App() {
-  const [{ questions, status, index }, dispatch] = useReducer(reducer, initialState);
+  const [{ questions, status, index, answer, point }, dispatch] = useReducer(
+    reducer,
+    initialState,
+  );
   const numQuestions = questions?.length;
 
   useEffect(() => {
@@ -57,8 +71,16 @@ export default function App() {
       <Main>
         {status === "loading" && <Loader />}
         {status === "error" && <Error />}
-        {status === "ready" && <StarSceen numQuestions={numQuestions} dispatch={dispatch} />}
-        {status === "active" && <Question question={questions[index]} />}
+        {status === "ready" && (
+          <StarSceen numQuestions={numQuestions} dispatch={dispatch} />
+        )}
+        {status === "active" && (
+          <Question
+            question={questions[index]}
+            dispatch={dispatch}
+            answer={answer}
+          />
+        )}
       </Main>
     </div>
   );
