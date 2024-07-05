@@ -4,6 +4,7 @@ import Main from "./Main";
 import Loader from "./Loader";
 import Error from "./Error";
 import StarSceen from "./StarSceen";
+import Question from "./Question";
 
 // todo initialState
 const initialState = {
@@ -26,6 +27,11 @@ function reducer(state, action) {
       return {
         ...state,
         status: "error",
+      };
+    case "start":
+      return {
+        ...state,
+        status: "active",
       };
     default:
       throw new Error("Action unknow!!!");
@@ -50,7 +56,8 @@ export default function App() {
       <Main>
         {status === "loading" && <Loader />}
         {status === "error" && <Error />}
-        {status === "ready" && <StarSceen numQuestions={numQuestions} />}
+        {status === "ready" && <StarSceen numQuestions={numQuestions} dispatch={dispatch} />}
+        {status === "active" && <Question />}
       </Main>
     </div>
   );
