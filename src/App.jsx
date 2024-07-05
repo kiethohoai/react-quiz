@@ -1,6 +1,9 @@
 import React, { useEffect, useReducer } from "react";
 import Header from "./Header";
 import Main from "./Main";
+import Loader from "./Loader";
+import Error from "./Error";
+import StarSceen from "./StarSceen";
 
 // todo initialState
 const initialState = {
@@ -17,12 +20,12 @@ function reducer(state, action) {
       return {
         ...state,
         questions: action.payload,
-        staus: "ready",
+        status: "ready",
       };
     case "dataFailed":
       return {
         ...state,
-        staus: "error",
+        status: "error",
       };
     default:
       throw new Error("Action unknow!!!");
@@ -31,7 +34,8 @@ function reducer(state, action) {
 
 // todo App
 export default function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [{ questions, status }, dispatch] = useReducer(reducer, initialState);
+  const numQuestions = questions?.length;
 
   useEffect(() => {
     fetch(`http://localhost:8000/questions`)
@@ -44,8 +48,9 @@ export default function App() {
     <div className="app">
       <Header />
       <Main>
-        <p>1/15</p>
-        <p>Question?</p>
+        {status === "loading" && <Loader />}
+        {status === "error" && <Error />}
+        {status === "ready" && <StarSceen numQuestions={numQuestions} />}
       </Main>
     </div>
   );
