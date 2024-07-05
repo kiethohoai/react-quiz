@@ -46,7 +46,7 @@ function DateCounter() {
       type: "defineCount",
       payload: Number(e.target.value),
     });
-  };
+  }; 
 
   const defineStep = function (e) {
     dispatch({
