@@ -5,6 +5,7 @@ import Loader from "./Loader";
 import Error from "./Error";
 import StarSceen from "./StarSceen";
 import Question from "./Question";
+import NextButton from "./NextButton";
 
 // todo initialState
 // "loading", "error", "ready", "active", "finish"
@@ -45,6 +46,12 @@ function reducer(state, action) {
             ? state.point + question.points
             : state.point,
       };
+    case "nextQuestion":
+      return {
+        ...state,
+        index: state.index + 1,
+        answer: null,
+      };
     default:
       throw new Error("Action unknow!!!");
   }
@@ -75,11 +82,15 @@ export default function App() {
           <StarSceen numQuestions={numQuestions} dispatch={dispatch} />
         )}
         {status === "active" && (
-          <Question
-            question={questions[index]}
-            dispatch={dispatch}
-            answer={answer}
-          />
+          <>
+            <Question
+              question={questions[index]}
+              dispatch={dispatch}
+              answer={answer}
+            />
+
+            <NextButton dispatch={dispatch} answer={answer} />
+          </>
         )}
       </Main>
     </div>

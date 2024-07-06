@@ -145,12 +145,27 @@ progress {
 }
 
 button.btn.btn-ui {
-    margin: 0;
-    position: absolute;
-    top: 36%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+  margin: 0;
+  position: absolute;
+  top: 36%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+/* Let's start button */
+button.btn.btn-ui.btn-start {
+  top: 40%;
+}
+
+/* Next button custom css */
+button.btn.btn-ui.btn-next {
+  margin: 0;
+  position: absolute;
+  top: 63%;
+  left: 60.5%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 .options {
