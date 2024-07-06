@@ -6,15 +6,15 @@ import Error from "./Error";
 import StarSceen from "./StarSceen";
 import Question from "./Question";
 import NextButton from "./NextButton";
+import Progress from "./Progress";
 
 // todo initialState
-// "loading", "error", "ready", "active", "finish"
 const initialState = {
   questions: [],
   status: "loading",
   index: 0,
   answer: null,
-  point: 0,
+  points: 0,
 };
 
 // todo reducer
@@ -41,10 +41,10 @@ function reducer(state, action) {
       return {
         ...state,
         answer: action.payload,
-        point:
+        points:
           action.payload === question.correctOption
-            ? state.point + question.points
-            : state.point,
+            ? state.points + question.points
+            : state.points,
       };
     case "nextQuestion":
       return {
@@ -59,11 +59,15 @@ function reducer(state, action) {
 
 // todo App
 export default function App() {
-  const [{ questions, status, index, answer, point }, dispatch] = useReducer(
+  const [{ questions, status, index, answer, points }, dispatch] = useReducer(
     reducer,
     initialState,
   );
   const numQuestions = questions?.length;
+  const maxPossiblePoints = questions.reduce(
+    (prev, cur) => prev + cur.points,
+    0,
+  );
 
   useEffect(() => {
     fetch(`http://localhost:8000/questions`)
@@ -83,6 +87,13 @@ export default function App() {
         )}
         {status === "active" && (
           <>
+            <Progress
+              index={index}
+              numQuestions={numQuestions}
+              points={points}
+              maxPossiblePoints={maxPossiblePoints}
+              answer={answer}
+            />
             <Question
               question={questions[index]}
               dispatch={dispatch}
