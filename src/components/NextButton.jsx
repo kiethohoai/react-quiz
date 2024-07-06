@@ -1,7 +1,6 @@
 import React from "react";
 
 function NextButton({ dispatch, answer, index, numQuestions }) {
-  console.log("🚀CHECK  index, numQuestions =", index, numQuestions);
   if (answer === null) return;
 
   if (index < numQuestions - 1) {

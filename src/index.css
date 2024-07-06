@@ -161,9 +161,10 @@ button.btn.btn-ui.btn-start {
 /* Next button custom css */
 button.btn.btn-ui.btn-next {
   margin: 0;
-  position: absolute;
-  top: 63%;
-  left: 60.5%;
+  position: relative !important;
+  /* top: 72%; */
+  left: 44px;
+  margin-top: 22px;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
