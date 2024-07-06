@@ -10,3 +10,4 @@
 010 Handling New Answers
 011 Moving to the Next Question
 012 Displaying Progress
+013 Finishing a Quiz
