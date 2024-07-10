@@ -1,9 +1,7 @@
 import { type } from "@testing-library/user-event/dist/type";
 import React from "react";
-import { useQuiz } from "../contexts/QuizContext";
 
-function Options() {
-  const { question, dispatch, answer } = useQuiz();
+function Options({ question, dispatch, answer }) {
   const hasAnswer = answer !== null;
   return (
     <div className="options">

@@ -1,9 +1,6 @@
 import React from "react";
-import { useQuiz } from "../contexts/QuizContext";
 
-function StarSceen() {
-  const { numQuestions, dispatch } = useQuiz();
-
+function StarSceen({ numQuestions, dispatch }) {
   return (
     <div style={{ textAlign: "center" }}>
       <h2>Welcome to The React Quiz</h2>

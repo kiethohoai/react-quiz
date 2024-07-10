@@ -169,10 +169,6 @@ button.btn.btn-ui.btn-next {
   transform: translate(-50%, -50%);
 }
 
-button.btn.btn-ui.btn-restart {
-    margin-top: 48px;
-}
-
 .options {
   display: flex;
   flex-direction: column;
